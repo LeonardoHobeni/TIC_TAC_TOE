@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1634080425 source:c:\cpp\tic tac toe\main.cpp
+	<iostream>
+	"ttt.h"
+
+1634955346 c:\cpp\tic tac toe\ttt.h
+
+1634955146 source:c:\cpp\tic tac toe\tttimp.cpp
+	<iostream>
+	"ttt.h"
+
