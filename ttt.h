@@ -1,6 +1,5 @@
 #ifndef TTT_H
 #define TTT_H
-const int ROW = 3, COL = 3;
 class TTT
 {
     public:
@@ -19,7 +18,7 @@ class TTT
         bool Play(char);
 
     private:
-        char Board[ROW][COL];
+        char **Board;
 };
 
 #endif
