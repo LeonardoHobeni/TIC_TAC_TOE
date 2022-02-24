@@ -4,10 +4,19 @@
 const int Row = 3, Col = 3;
 using namespace std;
 
+void TTT::setBoard()
+{
+ //setting the board
+    Board = new char*[ROW];
+    for(int i = 0; i < ROW; i++)
+        Board[i] = new char [COL];
+}
+
 void TTT::PlayAgain()
 {
     char play = 'Y';
     int Player1, Player2;
+    setBoard();//setting board
     while(Play(play))
     {
         //Initializing array:
