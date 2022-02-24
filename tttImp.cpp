@@ -106,6 +106,8 @@ void TTT::playGame(int& Player1, int& Player2)
             PlaceSymbol(P2);
             P2T++;//counts player turns
         }
+        system("cls");
+        BoardGuide();
         printBoard();//prints updated board
     }
 
@@ -115,7 +117,7 @@ void TTT::playGame(int& Player1, int& Player2)
         {
             P1P++;
             cout << "Player 1 won the game" << endl;
-            cout << "Won by " << P1T << " plays" << endl;
+            cout << "Won by " << P1T+P2T << " plays" << endl;
             cout << "Has " << P1P << " point(s)." << endl;
             Player1 = P1P;
         }
@@ -124,7 +126,7 @@ void TTT::playGame(int& Player1, int& Player2)
             P2P++;
             cout << "Player 2 won the game" << endl;
             cout << "Won by " << P2T << " plays" << endl;
-            cout << "Has " << P2P << " point(s)." << endl;
+            cout << "Has " << P2P+P1T << " point(s)." << endl;
             Player2 = P2P;
         }
     }
