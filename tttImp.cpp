@@ -36,6 +36,7 @@ void TTT::PlayAgain()
     cout << "Player 1 point(s): " << Player1 << endl;
     cout << "Player 2 point(s): " << Player2 << endl;
     cout << "GAME OVER!!!" << endl;
+    system("cls");
 }
 
 void TTT::Initialize()
@@ -140,61 +141,75 @@ void TTT::playGame(int& Player1, int& Player2)
 
 bool TTT::Winner()
 {
-    //Player 1:
+   //Player 1&2:
     //checking rows:
+    int count_symbolX= 0;
+    int count_symbolO= 0;
     for(int i = 0; i < Row; i++)
-        for(int j = 1; j <= 1; j++)
-            if((Board[i][Col-(j+2)] == 'X')&&(Board[i][Col-(j+1)] == 'X')&&
-               (Board[i][Col-j] == 'X'))
-                return true;
+    {
+        for(int j = 0; j < Col; j++)
+        {
+            if(Board[i][j]=='X')
+                count_symbolX++;
+            if(Board[i][j]=='O')
+                count_symbolO++;
+        }
+        if(count_symbolX==3||count_symbolO==3)
+            return true;
+        else
+        {
+            count_symbolX=0;
+            count_symbolO=0;
+        }
+    }
 
     //checking columns:
     for(int j = 0; j < Col; j++)
-        for(int i = 1; i <= 1; i++)
-            if((Board[Row-(i+2)][j] == 'X')&&(Board[Row-(i+1)][j] == 'X')&&
-               (Board[Row-i][j] == 'X'))
-               return true;
+    {
+        for(int i = 0; i < Row; i++)
+        {
+            if(Board[i][j]=='X')
+                count_symbolX++;
+            if(Board[i][j]=='O')
+                count_symbolO++;
+        }
+        if(count_symbolX==3||count_symbolO==3)
+            return true;
+        else
+        {
+            count_symbolX=0;
+            count_symbolO=0;
+        }
+    }
+
 
     //checking diagonals:
     //main diagonal:
-    for(int i = 0; i < 1; i++)
-        if((Board[i][i] == 'X')&&(Board[i+1][i+1] == 'X')&&
-           (Board[i+2][i+2] == 'X'))
+    for(int i = 0; i < 3; i++)
+    {
+        if(Board[i][i]=='X')
+            count_symbolX++;
+        if(Board[i][i]=='O')
+            count_symbolO++;
+        if(count_symbolX==3||count_symbolO==3)
+        {
+            count_symbolX=0;
+            count_symbolO=0;
             return true;
+        }
+    }
 
     //Other diagonal:
     for(int j = 0; j < 1; j++)
+    {
         if((Board[j][2] == 'X')&&(Board[j+1][2-(j+1)] == 'X')&&
            (Board[j+2][2-(j+2)] == 'X'))
             return true;
-
-    //Player 2:
-    //checking rows:
-    for(int i = 0; i < Row; i++)
-        for(int j = 1; j <= 1; j++)
-            if((Board[i][Col-(j+2)] == 'O')&&(Board[i][Col-(j+1)] == 'O')&&
-               (Board[i][Col-j] == 'O'))
-                return true;
-
-    //checking columns:
-    for(int j = 0; j < Col; j++)
-        for(int i = 1; i <= 1; i++)
-            if((Board[Row-(i+2)][j] == 'O')&&(Board[Row-(i+1)][j] == 'O')&&
-               (Board[Row-i][j] == 'O'))
-                return true;
-
-    //checking diagonals:
-    //main diagonal:
-    for(int i = 0; i < 1; i++)
-        if((Board[i][i] == 'O')&&(Board[i+1][i+1] == 'O')&&
-           (Board[i+2][i+2] == 'O'))
-            return true;
-
-    //Other diagonal:
-    for(int j = 0; j < 1; j++)
         if((Board[j][2] == 'O')&&(Board[j+1][2-(j+1)] == 'O')&&
            (Board[j+2][2-(j+2)] == 'O'))
             return true;
+    }
+
     return false;
 }
 
@@ -261,29 +276,50 @@ bool TTT::EmptySpace(int row, int col)
 
 char TTT::WhoWon()
 {
+    //Player 1&2:
     //checking rows:
+    int count_symbolX= 0;
     for(int i = 0; i < Row; i++)
-        for(int j = 0; j <1; j++)
-            if((Board[i][j] == 'X')&&(Board[i][j+1] == 'X')&&
-               (Board[i][j+2] == 'X'))
-                return 'X';
+    {
+        for(int j = 0; j < Col; j++)
+            if(Board[i][j]=='X')
+                count_symbolX++;
+        if(count_symbolX==3)
+            return 'X';
+        else
+            count_symbolX=0;
+    }
 
     //checking columns:
     for(int j = 0; j < Col; j++)
-        for(int i = 0; i < 1; i++)
-            if((Board[i][j] == 'X')&&(Board[i+1][j] == 'X')&&
-               (Board[i+2][j] == 'X'))
-                return 'X';
+    {
+        for(int i = 0; i < Row; i++)
+            if(Board[i][j]=='X')
+                count_symbolX++;
+        if(count_symbolX==3)
+            return 'X';
+        else
+            count_symbolX=0;
+    }
+
 
     //checking diagonals:
-    for(int i = 0; i < 1; i++)
-        if((Board[i][i] == 'X')&&(Board[i+1][i+1] == 'X')&&
-           (Board[i+2][i+2] == 'X'))
+    //main diagonal:
+    for(int i = 0; i < 3; i++)
+    {
+        if(Board[i][i]=='X')
+            count_symbolX++;
+        if(count_symbolX==3)
+        {
+            count_symbolX=0;
             return 'X';
+        }
+    }
 
+    //Other diagonal:
     for(int j = 0; j < 1; j++)
-        if((Board[j][2] == 'O')&&(Board[j+1][2-(j+1)] == 'O')&&
-           (Board[j+2][2-(j+2)] == 'O'))
+        if((Board[j][2] == 'X')&&(Board[j+1][2-(j+1)] == 'X')&&
+           (Board[j+2][2-(j+2)] == 'X'))
             return 'X';
     return 'O';
 }
